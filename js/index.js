@@ -3,7 +3,7 @@
 const venice = document.querySelector('.img-fluid')
 venice.addEventListener('mouseover', event => {
     // console.log("mic check");
-    venice.style.transform = 'rotate(20deg) translate(50px, 100px)';
+    venice.style.transform = 'rotate(20deg)';
     venice.style.transitionDuration = '1s';
 })
 
@@ -17,7 +17,6 @@ document.addEventListener('keyup', (event) => {
 
 //'wheel'
 let angle = 0;
-const map = document.querySelector('div.img-content:nth-child(2) > img:nth-child(1)')
 function twist(event) {
     event.preventDefault();
 
@@ -106,22 +105,62 @@ focusLink.addEventListener('focus', event => {
 window.addEventListener('resize', (event) => {
     document.querySelector('header').style.backgroundColor = 'purple';
 })
-/*
-Using your[index.js file], create 10 unique event listeners using your creativity to make the Fun Bus site more interactive.  Here are some unique events you could try to use:
-    * [x] `mouseover`
-    * [x]`keydown`
-    * [x]`wheel`
-    * [x]`drag / drop`
-    * [x]`load` - makes sure JS doesn't run till site is rendered
-    * [x]`focus`
-    * []`resize`
-    * []`scroll`
-    * []`select`
-    * []`dblclick`
-    * []`cut` BONUS b/c `load` was cheap
-* [ ] Nest two similar events somewhere in the site and prevent the event propagation properly
-* [ ] Stop the navigation items from refreshing the page by using `preventDefault()`
 
-## Stretch Task:
+//'scroll'
+const map = document.querySelector('div.img-content:nth-child(2) > img:nth-child(1)')
+window.addEventListener('scroll', event => {
+    let opacityRand = Math.random();
+    map.style.opacity = opacityRand;
+})
+
+//'select'
+const select = document.querySelector('#select')
+select.addEventListener('select', event => {
+    alert("You selected some text!");
+})
+
+//'dblclick'
+const colorBtn = document.querySelector('div.destination:nth-child(3) > div:nth-child(3)')
+colorBtn.addEventListener('dblclick', event => {
+    function randomRGB() {
+        return Math.floor(Math.random() * 256);
+    }
+
+    var red = randomRGB();
+    var green = randomRGB();
+    var blue = randomRGB();
+    var rgbColor = 'rgb(' + red + ',' + green + ',' + blue + ')';
+
+    colorBtn.style.backgroundColor = rgbColor;
+})
+
+//'cut' b/c why not
+document.addEventListener('cut', event => {
+    document.body.textContent = "Bye Fiveever"
+})
+
+
+
+/* Nest two similar events somewhere in the site and prevent the event propagation properly*/
+
+const nestedBtn = document.querySelector('div.destination:nth-child(1) > div:nth-child(3)')
+nestedBtn.addEventListener('click', event => {
+    nestedBtn.style.backgroundColor = 'blue';
+    event.stopPropagation();
+})
+const fitsDiv = document.querySelector('div.destination:nth-child(1)')
+fitsDiv.addEventListener('click', event => {
+    fitsDiv.style.backgroundColor = 'red';
+})
+
+/* Stop the navigation items from refreshing the page by using `preventDefault()`*/
+const navItems = document.querySelectorAll('a.nav-link')
+console.log(navItems)
+navItems.addEventListener('click', function (event) {
+    event.preventDefault();
+})
+
+/*## Stretch Task:
 * [ ] Go look at [GSAP](https://greensock.com/) and implement the animations found in that library with your custom events.
 */
+
