@@ -155,12 +155,15 @@ fitsDiv.addEventListener('click', event => {
 
 /* Stop the navigation items from refreshing the page by using `preventDefault()`*/
 const navItems = document.querySelectorAll('a.nav-link')
-console.log(navItems)
-navItems.addEventListener('click', function (event) {
-    event.preventDefault();
-})
+navItems.forEach(item => {
+    item.addEventListener('click', function (event) {
+        event.preventDefault();
+        console.log(item);
 
-/*## Stretch Task:
-* [ ] Go look at [GSAP](https://greensock.com/) and implement the animations found in that library with your custom events.
-*/
+    })
+})
+ 
+
+
+
 
